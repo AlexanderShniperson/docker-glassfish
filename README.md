@@ -9,7 +9,7 @@ For more information and documentation, read the [Docker Images from Oracle Linu
 
 1. Checkout the GitHub glassfish/dockerfiles repository
 
-	$ git checkout git@github.com:glassfish/docker.git glassfish-docker
+	$ git checkout https://github.com/AlexanderShniperson/docker-glassfish.git glassfish-docker
 	
 	$ cd glassfish-docker
 
@@ -35,8 +35,6 @@ At terminal run:
 	$ systemctl start glassfish
 
 This script will automagically start default **domain1** and the container will be daemonized.
-
-Because **asadmin** by default will exit after **start-domain**, make sure to add **--verbose=true** to keep the process running in foreground. This way, Docker will keep it running.
 
 ## Deploying Java EE Applications
 
