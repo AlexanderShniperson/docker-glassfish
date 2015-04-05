@@ -1,0 +1,16 @@
+[Unit]
+Description=Glassfish 4.1
+After=docker.service
+Requires=docker.service
+      
+[Service]
+Restart=on-failure
+ExecStart=/usr/bin/docker run -e "JVM_XMX_SIZE=1G" --name glassfish \
+-v /home/core/glassfish/applications/:/opt/glassfish/applications/ \
+-v /home/core/glassfish/logs/:/opt/glassfish/glassfish4/glassfish/domains/domain1/logs/ \
+glassfish:4.1
+ExecStop=/usr/bin/docker stop glassfish
+ExecStopPost=/usr/bin/docker rm glassfish
+      
+[Install]
+WantedBy=multi-user.target

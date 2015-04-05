@@ -2,11 +2,7 @@
 
 This is a Dockerfile for [GlassFish Open Source Edition](http://www.glassfish.org) for version 4.1. The purpose of this Docker container is to facilitate the setup of development and integration testing environments for developers.
 
-## Install Oracle Linux 7 Base Docker Image
-The Dockerfiles contained in this project will build images based on the Oracle Linux 7.0 Base Docker Image. In order to easily install that, run the following script:
-
-	$ install-ol7-docker-image.sh
-
+## Based on Oracle Linux 7 Base Docker Image
 For more information and documentation, read the [Docker Images from Oracle Linux](http://public-yum.oracle.com/docker-images) page.
 
 ## How to build
@@ -17,9 +13,11 @@ For more information and documentation, read the [Docker Images from Oracle Linu
 	
 	$ cd glassfish-docker
 
-2. [Download](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and drop the Oracle JDK 8u25 RPM 64bit file **jdk-8u25-linux-x64.rpm** in this folder
+2. [Download](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and drop the Oracle JDK 8u40 RPM 64bit file **jdk-8u40-linux-x64.rpm** in this folder
 
-	Linux x64       135.6 MB        jdk-8u25-linux-x64.rpm
+	Linux x64       135.6 MB        jdk-8u40-linux-x64.rpm
+
+2.1 [Download](http://dlc-cdn.sun.com/glassfish/4.1/release/glassfish-4.1.zip) and drop the file glassfish-4.1.zip in this folder
 
 3. Execute the build script as root
 
@@ -33,16 +31,10 @@ The image and the default domain are built with the following credentials:
 
 ## Booting up GlassFish on Docker
 
-Along with the Dockerfile, one script is also provided to help you run GlassFish easily. To boot GlassFish, execute
+At terminal run:
+	$ systemctl start glassfish
 
-	$ sudo sh dockGlassFish.sh
-
-This script will automagically start default **domain1** and bind ports 4848 and 8080 to the host server. Log will be supressed, and the container will be daemonized. If you want to run GlassFish with ports binded to host, with log files on STDOUT, run the following command:
-
-	$ sudo docker run -ti -p 4848:4848            \
-		-p 8080:8080 glassfish:4.1            \
-		/opt/glassfish/glassfish4/bin/asadmin \
-		start-domain --verbose=true
+This script will automagically start default **domain1** and the container will be daemonized.
 
 Because **asadmin** by default will exit after **start-domain**, make sure to add **--verbose=true** to keep the process running in foreground. This way, Docker will keep it running.
 
