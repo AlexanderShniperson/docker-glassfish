@@ -32,7 +32,6 @@ MAINTAINER Bruno Borges <bruno.borges@oracle.com>
 # -------------------------------------------------------------
 ENV JAVA_RPM jdk-8u40-linux-x64.rpm
 ENV GLASSFISH_PKG glassfish-4.1.zip
-ENV POSTGRE_JDBC_PKG http://jdbc.postgresql.org/download/postgresql-9.3-1102.jdbc4.jar
 
 # Install and configure Oracle JDK 8u40
 # -------------------------------------
@@ -49,7 +48,7 @@ RUN yum install -y unzip && yum clean all
 RUN useradd -mU glassfish -b /opt/ && echo glassfish:glassfish | chpasswd
 ADD $GLASSFISH_PKG /opt/glassfish/
 RUN cd /opt/glassfish/ && unzip $GLASSFISH_PKG && rm $GLASSFISH_PKG
-RUN curl $POSTGRE_JDBC_PKG -o /opt/glassfish/glassfish4/glassfish/lib/postgresql-9.3-1102.jdbc4.jar
+RUN curl https://jdbc.postgresql.org/download/postgresql-9.4-1201.jdbc4.jar -o /opt/glassfish/glassfish4/glassfish/lib/postgresql-9.4-1201.jdbc4.jar
 ADD glassfish-start.sh /opt/glassfish/
 RUN chown -R glassfish:glassfish /opt/glassfish/
 RUN chmod +x /opt/glassfish/glassfish-start.sh

@@ -30,7 +30,7 @@ echo ""
 echo "====================="
 echo "Installing glassfish service to run under SystemD"
 cp ./glassfish.service /etc/systemd/system/
-systemctl enable glassfish
+systemctl enable /etc/systemd/system/glassfish.service
 echo "Ready."
 
 echo ""
